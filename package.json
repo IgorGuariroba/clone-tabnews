@@ -4,9 +4,11 @@
   "description": "implementação do tabnew para https://www.tabnews.com.br para o http://curso.dev",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "author": "",
+  "author": "Igor Guariroba",
   "license": "MIT",
   "dependencies": {
     "next": "^13.1.6",
