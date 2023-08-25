@@ -11,13 +11,11 @@ COPY package*.json ./
 # Update npm to the latest version
 RUN npm install -g npm@latest
 
-# Change to non-root user
-USER node
-
-# Copy the desired files from your project to the current directory in the container
-COPY --chown=node:node . .
+# Copy the desired files from your project to the current directory into the container
+COPY . .
 
 # Install dependencies
 RUN npm install
+
 # Run the web service on container startup.
 CMD [ "npm", "run", "dev" ]
