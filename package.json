@@ -1,7 +1,7 @@
 {
   "name": "clone-tabnews",
   "version": "1.0.0",
-  "description": "implementação do tabnew para https://www.tabnews.com.br para o http://curso.dev",
+  "description": "implementação do tab new para https://www.tabnews.com.br para o https://curso.dev",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -15,7 +15,9 @@
   "author": "Igor Guariroba",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.5.0",
     "next": "^13.1.6",
+    "node-fetch": "^2.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
