@@ -16,5 +16,5 @@ services:
       - NODE_ENV=development
       - DISABLE_WATCHPACK=true
     volumes:
-      - .:/app
+      - ../:/app
       - /app/node_modules

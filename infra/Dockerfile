@@ -19,3 +19,5 @@ RUN npm install
 
 # Run the web service on container startup.
 CMD [ "npm", "run", "dev" ]
+# manter o container rodando
+#CMD ["tail", "-f", "/dev/null"]
