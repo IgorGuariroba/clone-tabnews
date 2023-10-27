@@ -3,17 +3,17 @@ services:
   database:
     image: "postgres:16.0-alpine3.18"
     environment:
-      POSTGRES_PASSWORD: "local_password"
+      POSTGRES_PASSWORD: ${PASSWORD_BD}
     ports:
-      - "5432:5432"
+      - "${PORT_BD}:${PORT_BD}"
   web:
     build:
       context: ../
       dockerfile: infra/Dockerfile
     ports:
-      - "3000:3000"
+      - "${PORT_APP}:${PORT_APP}"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV}
       - DISABLE_WATCHPACK=true
     volumes:
       - ../:/app
