@@ -8,8 +8,8 @@ services:
       - "5432:5432"
   web:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: infra/Dockerfile
     ports:
       - "3000:3000"
     environment:
