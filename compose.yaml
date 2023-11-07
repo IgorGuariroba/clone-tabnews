@@ -8,7 +8,7 @@ services:
       - "${PORT_BD}:${PORT_BD}"
   web:
     build:
-      context: ../
+      context: .
       dockerfile: infra/Dockerfile
     ports:
       - "${PORT_APP}:${PORT_APP}"
@@ -16,5 +16,5 @@ services:
       - NODE_ENV=${NODE_ENV}
       - DISABLE_WATCHPACK=true
     volumes:
-      - ../:/app
+      - .:/app
       - /app/node_modules
