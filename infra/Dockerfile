@@ -5,6 +5,8 @@ FROM node:18-alpine
 # Create and change to the app directory.
 WORKDIR /app
 
+RUN apk add git
+
 # to the app directory
 COPY package*.json ./
 
