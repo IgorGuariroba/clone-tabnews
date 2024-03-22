@@ -1,0 +1,6 @@
+HOST_BD=localhost
+PORT_DB=5432
+USER_BD=usertest
+DATA_BASE_BD=userbase
+PASSWORD_BD=usertest
+NODE_ENV=16
