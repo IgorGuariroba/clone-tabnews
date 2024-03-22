@@ -19,3 +19,4 @@ export default async function status(req, res) {
         active_connections: activeConnections
     });
 }
+
