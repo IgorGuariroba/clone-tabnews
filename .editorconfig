@@ -199,7 +199,7 @@ ij_typescript_while_on_new_line = false
 ij_typescript_wrap_comments = false
 
 [{*.cjs,*.js}]
-ij_continuation_indent_size = 4
+ij_continuation_indent_size = 2
 ij_javascript_align_imports = false
 ij_javascript_align_multiline_array_initializer_expression = false
 ij_javascript_align_multiline_binary_operation = false
