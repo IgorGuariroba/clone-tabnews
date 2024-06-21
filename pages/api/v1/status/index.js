@@ -13,7 +13,7 @@ export default async function status(request, response) {
     dependencies: {
       database: {
         version: databaseVersionValue,
-        max_connnections: databaseMaxConnectionsValue,
+        max_connnections: parseInt(databaseMaxConnectionsValue),
       }
     }
   });
