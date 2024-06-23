@@ -8,8 +8,8 @@ export default async function status(request, response) {
   const databaseMaxConnectionsResult = await database.query("SHOW max_connections;");
   const databaseMaxConnectionsValue = databaseMaxConnectionsResult.rows[0].max_connections;
 
-  const databaseOpendConnectionsResult = await database.query("SELECT * FROM pg_stat_activity WHERE datname = 'nomedb';");
-  console.log(databaseOpendConnectionsResult.rows);
+  const databaseOpendConnectionsResult = await database.query("SELECT COUNT(*)::int FROM pg_stat_activity WHERE datname = 'nomedb';");
+  const databaseOpenedConnectsValues = databaseOpendConnectionsResult.rows[0].count;
 
   response.status(200).json({
     updatedAt: updatedAt,
@@ -17,6 +17,7 @@ export default async function status(request, response) {
       database: {
         version: databaseVersionValue,
         max_connnections: parseInt(databaseMaxConnectionsValue),
+        opened_connections: databaseOpenedConnectsValues
       }
     }
   });
