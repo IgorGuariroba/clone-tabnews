@@ -1,4 +1,5 @@
 import { Client } from "pg";
+
 async function query(queryObject) {
   const client = new Client({
     host: process.env.DB_HOST,
@@ -9,9 +10,14 @@ async function query(queryObject) {
   });
 
   await client.connect();
-  const result = await client.query(queryObject);
-  await client.end();
-  return result;
+  try {
+    const result = await client.query(queryObject);
+    return result;
+  } catch (e) {
+    console.log(e);
+  } finally {
+    await client.end();
+  }
 }
 
 export default {
