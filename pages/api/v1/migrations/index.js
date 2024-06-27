@@ -12,14 +12,17 @@ export default async function migrations(request, response) {
   }
 
   if (request.method === "POST") {
-    const migrations = await migrationRunner({
+    const migratedMigrations = await migrationRunner({
       ...defaultMigrationsOptions,
       dryRun: false
     });
-    response.status(200).json(migrations);
+
+    const code = migratedMigrations.length > 0 ? 201 : 200;
+    response.status(code).json(migratedMigrations);
+
   } else if (request.method === "GET") {
-    const migrations = await migrationRunner(defaultMigrationsOptions);
-    response.status(200).json(migrations);
+    const pendMigrations = await migrationRunner(defaultMigrationsOptions);
+    response.status(200).json(pendMigrations);
   } else {
     response.status(405).json({error: "Invalid request method"});
   }
