@@ -1,7 +1,7 @@
 const nextJest = require("next/jest");
 
 const createdJestConfig = nextJest({
-  dir: './',
+  dir: '.',
 });
 const jestConfig = createdJestConfig({
   moduleDirectories: ["node_modules","<rootDir>"],

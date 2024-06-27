@@ -11,7 +11,7 @@ export default async function migrations(request, response) {
       verbose: true,
       migrationsTable: "pgmigrations",
     });
-    response.status(200).json([]);
+    response.status(200).json(migrations);
   } else if (request.method === "GET") {
     const migrations = await migrationRunner({
       databaseUrl: process.env.DATABASE_URL,
@@ -21,7 +21,7 @@ export default async function migrations(request, response) {
       verbose: true,
       migrationsTable: "pgmigrations",
     });
-    response.status(200).json([]);
+    response.status(200).json(migrations);
   } else {
     response.status(405).json({ error: "Invalid request method" });
   }
