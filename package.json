@@ -15,7 +15,9 @@
     "test": "jest --runInBand",
     "test:watch": "jest --colors --watchAll --runInBand",
     "migration:create": "node-pg-migrate -m infra/migrations create",
-    "migration:up": "node-pg-migrate -m infra/migrations --envPath .env.development up"
+    "migration:up:dev": "node-pg-migrate -m infra/migrations --envPath .env.development up",
+    "migration:up:prod": "node-pg-migrate -m infra/migrations up",
+    "migration:up": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run migration:up:prod; else npm run migration:up:dev; fi"
   },
   "author": "Igor Guariroba",
   "license": "MIT",
