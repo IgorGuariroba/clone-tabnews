@@ -1,0 +1,2 @@
+POST https://clone-tabnews-ten-sage.vercel.app/api/v1/migrations
+Content-Type: application/json
