@@ -1,6 +1,19 @@
-import { Client } from "pg";
+import {Client} from "pg";
 
 async function query(queryObject) {
+  let client;
+  try {
+    client = await getNewClient();
+    return await client.query(queryObject);
+  } catch (error) {
+    console.log(error);
+    throw error
+  } finally {
+    await client.end();
+  }
+}
+
+async function getNewClient(){
   const client = new Client({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -10,18 +23,11 @@ async function query(queryObject) {
     ssl: process.env.NODE_ENV === "production",
   });
 
-  try {
-    await client.connect();
-    const result = await client.query(queryObject);
-    return result;
-  } catch (error) {
-    console.log(error);
-    throw error
-  } finally {
-    await client.end();
-  }
+  await client.connect();
+  return client;
 }
 
 export default {
-  query: query,
+  query,
+  getNewClient
 };
