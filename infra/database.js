@@ -20,7 +20,7 @@ async function getNewClient(){
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl: process.env.NODE_ENV === "production",
+    ssl: getSSLValues(),
   });
 
   await client.connect();
@@ -31,3 +31,12 @@ export default {
   query,
   getNewClient
 };
+
+function getSSLValues() {
+  if(process.env.DB_CA){
+    return {
+      ca: process.env.DB_CA
+    }
+  }
+  return process.env.NODE_ENV === "production"
+}
