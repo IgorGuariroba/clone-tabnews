@@ -1,3 +1,3 @@
 # rodar as migrações do banco
-POST https://clone-tabnews-ten-sage.vercel.app/api/v1/migrations
+POST {{BASE_URL}}/api/v1/migrations
 Content-Type: application/json
