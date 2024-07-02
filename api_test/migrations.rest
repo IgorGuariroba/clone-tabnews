@@ -1,3 +1,12 @@
-# rodar as migrações do banco
+### Rodar as migrações do banco
 POST {{BASE_URL}}/api/v1/migrations
 Content-Type: application/json
+
+### Buscar as migrações
+GET {{BASE_URL}}/api/v1/migrations
+Content-Type: application/json
+
+### Deletar as migrações
+DELETE {{BASE_URL}}/api/v1/migrations
+Content-Type: application/json
+
