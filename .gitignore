@@ -4,3 +4,4 @@
 .next/
 /coverage
 .env
+/package-lock.json
