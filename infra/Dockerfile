@@ -2,6 +2,9 @@
 # https://hub.docker.com/_/node
 FROM node:18-alpine
 
+# Instalar dependências do sistema
+RUN apk add --no-cache libc6-compat
+
 # Create and change to the app directory.
 WORKDIR /app
 
