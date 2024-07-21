@@ -2,7 +2,7 @@ name: 'clone-tabnews'
 services:
   postgres_dev:
     container_name: 'postgres-dev'
-    image: 'postgres:14.7-alpine'
+    image: 'postgres:16.0-alpine'
     env_file:
       - ../.env
     ports:
