@@ -1,4 +1,4 @@
-import {Client} from "pg";
+import { Client } from "pg";
 
 async function query(queryObject) {
   let client;
@@ -7,13 +7,13 @@ async function query(queryObject) {
     return await client.query(queryObject);
   } catch (error) {
     console.log(error);
-    throw error
+    throw error;
   } finally {
     await client.end();
   }
 }
 
-async function getNewClient(){
+async function getNewClient() {
   const client = new Client({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -29,14 +29,14 @@ async function getNewClient(){
 
 export default {
   query,
-  getNewClient
+  getNewClient,
 };
 
 function getSSLValues() {
-  if(process.env.DB_CA){
+  if (process.env.DB_CA) {
     return {
-      ca: process.env.DB_CA
-    }
+      ca: process.env.DB_CA,
+    };
   }
-  return process.env.NODE_ENV === "production"
+  return process.env.NODE_ENV === "production";
 }

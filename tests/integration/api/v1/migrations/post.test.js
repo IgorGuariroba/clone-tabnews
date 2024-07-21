@@ -1,6 +1,6 @@
 import database from "infra/database.js";
 
-beforeAll(cleanDatabase)
+beforeAll(cleanDatabase);
 
 async function cleanDatabase() {
   await database.query("drop schema public cascade; create schema public;");
@@ -17,9 +17,9 @@ test("POST to /api/v1/migrations should return 200", async () => {
 
   // Verifique se o primeiro item do array tem a estrutura correta
   const firstItem = responseBody[0];
-  expect(firstItem).toHaveProperty('path');
-  expect(firstItem).toHaveProperty('name');
-  expect(firstItem).toHaveProperty('timestamp');
+  expect(firstItem).toHaveProperty("path");
+  expect(firstItem).toHaveProperty("name");
+  expect(firstItem).toHaveProperty("timestamp");
 
   const response2 = await fetch("http://0.0.0.0:3000/api/v1/migrations", {
     method: "POST",
