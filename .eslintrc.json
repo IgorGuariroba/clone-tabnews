@@ -1,0 +1,16 @@
+{
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react"],
+  "rules": {
+    //    "no-console": "warn",  // Alerta para console.log
+    "eqeqeq": ["error", "always"], // Exigir uso de === e !==
+    "curly": ["error", "all"], // Exigir chaves para todos os blocos
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }], // Não permitir variáveis não utilizadas, exceto aquelas começando com _
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // Verificar automaticamente a versão do React
+    }
+  }
+}
