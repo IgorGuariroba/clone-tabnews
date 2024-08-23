@@ -33,7 +33,6 @@
     "dotenv-expand": "11.0.6",
     "next": "14.2.6",
     "node-pg-migrate": "7.6.1",
-    "node-pg-migrations": "0.0.7",
     "pg": "8.12.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"
