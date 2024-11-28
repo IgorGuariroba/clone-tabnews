@@ -8,22 +8,29 @@ export function Accordion({ data }) {
     setOpenItem(openItem === item ? null : item);
   };
 
+  const entries = Object.entries(data);
   return (
-    <div id="accordion-collapse" data-accordion="collapse" className="w-full">
+    <div id="accordion-collapse" data-accordion="collapse" className="w-2/4">
       {Object.entries(data).map(([key, value], index) => (
         <div key={index}>
           <h2 id={`accordion-collapse-heading-${index}`}>
             {typeof value === "object" ? (
               <button
                 type="button"
-                className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                className={
+                  index === 0
+                    ? "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                    : index === entries.length - 1
+                      ? "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                      : "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                }
                 data-accordion-target={`#accordion-collapse-body-${index}`}
-                aria-expanded={openItem === 1}
+                aria-expanded={openItem === index}
                 aria-controls={`accordion-collapse-body-${index}`}
-                onClick={() => toggleItem(1)}
+                onClick={() => toggleItem(index)}
               >
                 <span className="capitalize">{key}</span>
-                {openItem === 1 ? (
+                {openItem === index ? (
                   <FaChevronUp className="w-3 h-3 shrink-0" />
                 ) : (
                   <FaChevronDown className="w-3 h-3 shrink-0" />
@@ -35,7 +42,7 @@ export function Accordion({ data }) {
           </h2>
           <div
             id={`accordion-collapse-body-${index}`}
-            className={`${openItem === 1 ? "" : "hidden"}`}
+            className={`${openItem === index ? "" : "hidden"}`}
             aria-labelledby={`accordion-collapse-heading-${index}`}
           >
             <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
@@ -50,7 +57,6 @@ export function Accordion({ data }) {
           </div>
         </div>
       ))}
-      <h2 id="accordion-collapse-heading-3" className="border dark:border-gray-700"></h2>
     </div>
   );
 }
