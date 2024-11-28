@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "app/globals.css";
-import ServiceStatus from "../../components/ServiceStatus";
+import "@app/globals.css";
+import ServiceStatus from "@components/ServiceStatus";
 
 export default function StatusPage() {
   const [showDetails, setShowDetails] = useState(null);
