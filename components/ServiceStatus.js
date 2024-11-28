@@ -1,9 +1,9 @@
 import React, { useMemo, useCallback } from "react";
-import useStatusData from "../hooks/useStatusData";
-import ServiceItem from "./ServiceItem";
+import useStatusData from "@hooks/useStatusData";
+import ServiceItem from "@components/ServiceItem";
 
 function ServiceStatus({ showDetails, setShowDetails }) {
-  const { isLoading, data } = useStatusData();
+  const { isLoading, data } = useStatusData("/api/v1/status", 2000);
 
   const handleToggleDetails = useCallback(
     (serviceName) => {
