@@ -1,7 +1,6 @@
 import database from "infra/database";
 
 export default async function status(request, response) {
-  console.log("Hello World");
   const updatedAt = new Date().toISOString();
   const databaseVersionResult = await database.query("SHOW server_version;");
   const databaseVersionValue = databaseVersionResult.rows[0].server_version;
@@ -16,6 +15,18 @@ export default async function status(request, response) {
   });
   const databaseOpenedConnectsValues = databaseOpendConnectionsResult.rows[0].count;
 
+  // Placeholder for Cache status
+  const cacheStatus = "Not implemented";
+
+  // Placeholder for External API status
+  const externalApiStatus = "Not implemented";
+
+  // Placeholder for RabbitMQ status
+  const rabbitMQStatus = "Not implemented";
+
+  // Placeholder for AWS S3 status
+  const s3Status = "Not implemented";
+
   response.status(200).json({
     updatedAt: updatedAt,
     dependencies: {
@@ -23,6 +34,18 @@ export default async function status(request, response) {
         version: databaseVersionValue,
         max_connnections: parseInt(databaseMaxConnectionsValue),
         opened_connections: databaseOpenedConnectsValues,
+      },
+      cache: {
+        status: cacheStatus,
+      },
+      externalApi: {
+        status: externalApiStatus,
+      },
+      rabbitMQ: {
+        status: rabbitMQStatus,
+      },
+      s3: {
+        status: s3Status,
       },
     },
   });
