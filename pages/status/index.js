@@ -57,8 +57,8 @@ export default function StatusPage() {
       <div className="absolute top-0  left-0 p-4">
         <div className="relative bg-gray-800 text-white p-6 rounded-lg shadow-lg max-w-sm">
           <div className="flex flex-col items-center justify-center">
-            <span className="text-4xl font-bold tracking-wide">{new Date().toLocaleTimeString()}</span>
-            <span className="text-lg text-gray-400">{new Date().toLocaleDateString()}</span>
+            <span className="text-4xl font-bold tracking-wide">{new Date(data.updatedAt).toLocaleTimeString()}</span>
+            <span className="text-lg text-gray-400">{new Date(data.updatedAt).toLocaleDateString()}</span>
           </div>
         </div>
       </div>
