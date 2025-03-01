@@ -2,7 +2,7 @@ import { createRouter } from "next-connect";
 import migrationRunner from "node-pg-migrate";
 import { resolve } from "node:path";
 import database from "infra/database.js";
-import { InternalServerError, MethodNotAllowedError } from "../../../../infra/errors";
+import { onErrorHandler, onNoMatchHandler } from "../../../../infra/controller";
 
 const router = createRouter();
 
@@ -48,22 +48,6 @@ async function postHandler(request, response) {
 }
 
 router.get(getHandler).post(postHandler);
-
-function onNoMatchHandler(request, response) {
-  const publicErrorObejct = new MethodNotAllowedError();
-  response.status(publicErrorObejct.statusCode).json(publicErrorObejct);
-}
-
-function onErrorHandler(error, request, response) {
-  const publicErrorObejct = new InternalServerError({
-    cause: error,
-  });
-
-  console.log("\n erro no catch do next-connect");
-  console.error(publicErrorObejct);
-
-  response.status(500).json(publicErrorObejct);
-}
 
 export default router.handler({
   onNoMatch: onNoMatchHandler,
