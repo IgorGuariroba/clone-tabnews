@@ -2,7 +2,7 @@ import { createRouter } from "next-connect";
 import migrationRunner from "node-pg-migrate";
 import { resolve } from "node:path";
 import database from "infra/database.js";
-import { onErrorHandler, onNoMatchHandler } from "../../../../infra/controller";
+import controller from "../../../../infra/controller";
 
 const router = createRouter();
 
@@ -49,7 +49,4 @@ async function postHandler(request, response) {
 
 router.get(getHandler).post(postHandler);
 
-export default router.handler({
-  onNoMatch: onNoMatchHandler,
-  onError: onErrorHandler,
-});
+export default router.handler(controller.errorHandlers);
