@@ -10,7 +10,6 @@ export default router.handler(controller.errorHandlers);
 
 async function getHandler(request, response) {
   try {
-    console.log("nome: oie");
     const updatedAt = new Date().toISOString();
     const databaseVersionResult = await database.query("SHOW server_version;");
     const databaseVersionValue = databaseVersionResult.rows[0].server_version;
