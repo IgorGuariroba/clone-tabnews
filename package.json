@@ -44,6 +44,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
+    "@types/jest": "^29.5.14",
     "autoprefixer": "^10.4.20",
     "commitizen": "4.3.0",
     "concurrently": "8.2.2",
