@@ -9,7 +9,6 @@ beforeAll(async () => {
 describe("POST /api/v1/users/[username]", () => {
   describe("Anonymous user", () => {
     test("With exact case match", async () => {
-
       const response = await fetch("http://localhost:3000/api/v1/users", {
         method: "POST",
         headers: {
@@ -39,7 +38,6 @@ describe("POST /api/v1/users/[username]", () => {
     });
 
     test("With case mismatch", async () => {
-
       const response1 = await fetch("http://localhost:3000/api/v1/users", {
         method: "POST",
         headers: {
@@ -68,7 +66,6 @@ describe("POST /api/v1/users/[username]", () => {
     });
 
     test("With nonexistent username", async () => {
-
       const response = await fetch("http://localhost:3000/api/v1/users/usernotexistent");
       expect(response.status).toBe(404);
       const responseBody = await response.json();
@@ -80,5 +77,4 @@ describe("POST /api/v1/users/[username]", () => {
       });
     });
   });
-
 });
