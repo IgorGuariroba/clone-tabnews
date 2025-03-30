@@ -37,6 +37,35 @@ describe("POST /api/v1/users/[username]", () => {
                 updated_at: responseBody.updated_at,
             });
         });
-        
+
+        test("With case mismatch", async () => {
+
+            const response1 = await fetch("http://localhost:3000/api/v1/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: "CaseDiferente",
+                    email: "casediferente.dev@gmail.com",
+                    password: "senha123",
+                }),
+            });
+
+            expect(response1.status).toBe(201);
+
+            const response3 = await fetch("http://localhost:3000/api/v1/users/casediferente");
+            expect(response3.status).toBe(200);
+            const responseBody = await response3.json();
+            expect(responseBody).toEqual({
+                id: responseBody.id,
+                username: "CaseDiferente",
+                email: "casediferente.dev@gmail.com",
+                password: "senha123",
+                created_at: responseBody.created_at,
+                updated_at: responseBody.updated_at,
+            });
+        });
     });
+
 });
