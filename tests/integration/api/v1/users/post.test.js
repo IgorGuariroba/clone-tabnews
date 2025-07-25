@@ -82,7 +82,7 @@ describe("POST /api/v1/users", () => {
       expect(response2Body).toEqual({
         name: "ValidationError",
         message: "O email informado já está sendo utilizado.",
-        action: "Utilize outro email para realizar está operação.",
+        action: "Utilize outro email para realizar esta operação.",
         status_code: 400,
       });
     });
