@@ -36,9 +36,7 @@ async function create(userInputValues) {
 
   const newUser = await runInsertQuery(userInputValues);
   return newUser;
-  async function hashPasswordInObject(userInputValues) {
-    userInputValues.password = await password.hash(userInputValues.password);
-  }
+
 
   async function runInsertQuery(userInputValues) {
     const results = await database.query({
@@ -62,7 +60,11 @@ async function update(username, userInputValues) {
     await validateUniqueEmail(userInputValues.email);
   }
 
-  const userWithNewValues = { ...currentUser, ...userInputValues};
+  if ('password' in userInputValues) {
+    await hashPasswordInObject(userInputValues);
+  }
+
+  const userWithNewValues = {...currentUser, ...userInputValues};
   return await runUpdateQuery(userWithNewValues);
 }
 
@@ -70,9 +72,11 @@ async function runUpdateQuery(userWithNewValues) {
   const results = await database.query({
     text: `
       UPDATE users
-      SET username = $1, email = $2, password = $3, updated_at = timezone('utc', now())
-      WHERE id = $4
-      RETURNING *
+      SET username   = $1,
+          email      = $2,
+          password   = $3,
+          updated_at = timezone('utc', now())
+      WHERE id = $4 RETURNING *
       ;`,
     values: [userWithNewValues.username, userWithNewValues.email, userWithNewValues.password, userWithNewValues.id],
   })
@@ -96,13 +100,14 @@ async function validateUniqueUsername(username) {
     });
   }
 }
+
 async function validateUniqueEmail(email) {
   const results = await database.query({
     text: `
-        SELECT email
-        FROM users
-        WHERE LOWER(email) = LOWER($1)
-        ;`,
+      SELECT email
+      FROM users
+      WHERE LOWER(email) = LOWER($1)
+      ;`,
     values: [email],
   });
 
@@ -113,6 +118,11 @@ async function validateUniqueEmail(email) {
     });
   }
 }
+
+async function hashPasswordInObject(userInputValues) {
+  userInputValues.password = await password.hash(userInputValues.password);
+}
+
 const user = {
   create,
   findOneByUsername,
