@@ -1,0 +1,112 @@
+# Regras do Cursor para o projeto Clone TabNews
+
+## Padrões de Commit (Conventional Commits)
+
+Siga sempre o padrão de commits convencionais:
+
+### Formato
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Tipos permitidos:
+- **feat**: Nova funcionalidade
+- **fix**: Correção de bug
+- **docs**: Mudanças na documentação
+- **style**: Formatação, ponto e vírgula, etc (não afeta código)
+- **refactor**: Refatoração de código
+- **perf**: Melhoria de performance
+- **test**: Adição ou correção de testes
+- **chore**: Mudanças em ferramentas, configurações, etc
+- **ci**: Mudanças em CI/CD
+- **build**: Mudanças no sistema de build
+
+### Exemplos:
+```
+feat: adiciona autenticação de usuário
+fix: corrige validação de email
+docs: atualiza README
+style: formata código com prettier
+refactor: melhora estrutura do modelo User
+perf: otimiza consulta de usuários
+test: adiciona testes para API de usuários
+chore: atualiza dependências
+```
+
+### Regras:
+1. **Sempre** use minúsculas para o tipo
+2. **Nunca** use ponto final na descrição
+3. **Máximo** 50 caracteres na descrição
+4. **Use** imperativo ("adiciona" não "adicionando")
+5. **Seja** específico e claro
+6. **Use** escopo quando relevante: `feat(api): adiciona endpoint de usuários`
+
+### Validação:
+- O projeto usa `@commitlint/config-conventional`
+- Commits são validados automaticamente com Husky
+- Use `npm run commit` para commit interativo com Commitizen
+
+## Padrões de Código
+
+### JavaScript/Node.js:
+- Use ESLint com configuração Next.js
+- Siga as regras do Prettier
+- Use async/await ao invés de Promises
+- Trate erros adequadamente
+- Use TypeScript quando possível
+
+### Estrutura de Arquivos:
+- APIs em `pages/api/v1/`
+- Modelos em `models/`
+- Testes em `tests/`
+- Infraestrutura em `infra/`
+
+### Testes:
+- Use Jest para testes
+- Testes de integração em `tests/integration/`
+- Nomeie arquivos como `*.test.js`
+- Use `describe` e `it` para organização
+
+### Banco de Dados:
+- Migrações em `infra/migrations/`
+- Use `node-pg-migrate` para migrações
+- Sempre teste migrações antes de aplicar
+
+## Comandos Úteis
+
+```bash
+# Desenvolvimento
+npm run dev
+
+# Testes
+npm run test
+npm run test:watch
+
+# Linting
+npm run lint:prettier:check
+npm run lint:prettier:fix
+npm run lint:eslint:check
+npm run lint:eslint:fix
+
+# Banco de dados
+npm run migrations:create
+npm run migrations:up
+
+# Commit
+npm run commit
+```
+
+## Boas Práticas
+
+1. **Sempre** rode os testes antes de fazer commit
+2. **Sempre** rode o linting antes de fazer commit
+3. **Use** commits atômicos (uma mudança por commit)
+4. **Documente** mudanças importantes
+5. **Teste** suas mudanças localmente
+6. **Mantenha** o histórico de commits limpo
+7. **Use** branches para features grandes
+8. **Revise** código antes de fazer merge
