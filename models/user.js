@@ -1,6 +1,6 @@
 import database from "infra/database.js";
-import password from "models/password.js"
-import {NotFoundError, ValidationError} from "infra/errors.js";
+import password from "models/password.js";
+import { NotFoundError, ValidationError } from "infra/errors.js";
 
 async function findOneByUsername(username) {
   const userFound = await runSelectQuery(username);
@@ -37,7 +37,6 @@ async function create(userInputValues) {
   const newUser = await runInsertQuery(userInputValues);
   return newUser;
 
-
   async function runInsertQuery(userInputValues) {
     const results = await database.query({
       text: `
@@ -60,11 +59,11 @@ async function update(username, userInputValues) {
     await validateUniqueEmail(userInputValues.email);
   }
 
-  if ('password' in userInputValues) {
+  if ("password" in userInputValues) {
     await hashPasswordInObject(userInputValues);
   }
 
-  const userWithNewValues = {...currentUser, ...userInputValues};
+  const userWithNewValues = { ...currentUser, ...userInputValues };
   return await runUpdateQuery(userWithNewValues);
 }
 
@@ -79,7 +78,7 @@ async function runUpdateQuery(userWithNewValues) {
       WHERE id = $4 RETURNING *
       ;`,
     values: [userWithNewValues.username, userWithNewValues.email, userWithNewValues.password, userWithNewValues.id],
-  })
+  });
   return results.rows[0];
 }
 
@@ -126,7 +125,7 @@ async function hashPasswordInObject(userInputValues) {
 const user = {
   create,
   findOneByUsername,
-  update
+  update,
 };
 
 export default user;

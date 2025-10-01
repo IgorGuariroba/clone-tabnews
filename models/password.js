@@ -1,4 +1,4 @@
-import bcryptjs from 'bcryptjs';
+import bcryptjs from "bcryptjs";
 
 function getNumberOfRounds() {
   return process.env.NODE_ENV === "production" ? 14 : 1;
@@ -15,6 +15,6 @@ async function compare(providedPassword, storedPassword) {
 
 const password = {
   hash,
-  compare
-}
+  compare,
+};
 export default password;

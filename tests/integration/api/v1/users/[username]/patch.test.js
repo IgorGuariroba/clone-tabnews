@@ -14,7 +14,7 @@ describe("PATCH /api/v1/users/[username]", () => {
   describe("Anonymous user", () => {
     test("With nonexistent 'username'", async () => {
       const response = await fetch("http://localhost:3000/api/v1/users/usernotexistente", {
-        method: "PATCH"
+        method: "PATCH",
       });
       expect(response.status).toBe(404);
       const responseBody = await response.json();
@@ -246,9 +246,9 @@ describe("PATCH /api/v1/users/[username]", () => {
       expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
       expect(responseBody.updated_at > responseBody.created_at).toBe(true);
 
-      const userInDatabase = await user.findOneByUsername('newPassword1');
-      const correctPasswordMatch = await password.compare("newPassword2",userInDatabase.password);
-      const inCorrectPasswordMatch = await password.compare("newPassword1",userInDatabase.password);
+      const userInDatabase = await user.findOneByUsername("newPassword1");
+      const correctPasswordMatch = await password.compare("newPassword2", userInDatabase.password);
+      const inCorrectPasswordMatch = await password.compare("newPassword1", userInDatabase.password);
       expect(correctPasswordMatch).toBe(true);
       expect(inCorrectPasswordMatch).toBe(false);
     });
