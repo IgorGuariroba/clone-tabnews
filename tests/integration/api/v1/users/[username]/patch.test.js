@@ -27,33 +27,14 @@ describe("PATCH /api/v1/users/[username]", () => {
     });
 
     test("With duplicated 'username'", async () => {
-      const user1Response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+     await orchestrator.createUser({
           username: "user1",
-          email: "user1@gmail.com",
-          password: "senha123",
-        }),
-      });
+        });
 
-      expect(user1Response.status).toBe(201);
 
-      const user2Response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      await orchestrator.createUser({
           username: "user2",
-          email: "user2@gmail.com",
-          password: "senha123",
-        }),
-      });
-
-      expect(user2Response.status).toBe(201);
+        });
 
       const response = await fetch("http://localhost:3000/api/v1/users/user2", {
         method: "PATCH",
@@ -76,41 +57,21 @@ describe("PATCH /api/v1/users/[username]", () => {
     });
 
     test("With duplicated 'email'", async () => {
-      const user1Response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "user3",
-          email: "user3@gmail.com",
-          password: "senha123",
-        }),
-      });
+     await orchestrator.createUser({
+      email: "user3@gmail.com",
+     });
 
-      expect(user1Response.status).toBe(201);
+    const createdUser2 = await orchestrator.createUser({
+      email: "user4@gmail.com",
+     });
 
-      const user2Response = await fetch("http://localhost:3000/api/v1/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: "user4",
-          email: "user4@gmail.com",
-          password: "senha123",
-        }),
-      });
-
-      expect(user2Response.status).toBe(201);
-
-      const response = await fetch("http://localhost:3000/api/v1/users/user2", {
+      const response = await fetch(`http://localhost:3000/api/v1/users/${createdUser2.username}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "user3@gmail.com",
+          email: "user4@gmail.com",
         }),
       });
 
