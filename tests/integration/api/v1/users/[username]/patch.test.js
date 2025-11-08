@@ -71,7 +71,7 @@ describe("PATCH /api/v1/users/[username]", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "user4@gmail.com",
+          email: "user3@gmail.com",
         }),
       });
 
