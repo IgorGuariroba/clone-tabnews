@@ -9,11 +9,11 @@ beforeAll(async () => {
 describe("GET /api/v1/users/[username]", () => {
   describe("Anonymous user", () => {
     test("With exact case match", async () => {
-     await orchestrator.createUser({
-      username: "igorGuariroba",
-      email: "igorguariroba.dev@gmail.com",
-      password: "senha123",
-     });
+      await orchestrator.createUser({
+        username: "igorGuariroba",
+        email: "igorguariroba.dev@gmail.com",
+        password: "senha123",
+      });
 
       const response2 = await fetch("http://localhost:3000/api/v1/users/igorGuariroba");
       expect(response2.status).toBe(200);
@@ -31,10 +31,10 @@ describe("GET /api/v1/users/[username]", () => {
 
     test("With case mismatch", async () => {
       await orchestrator.createUser({
-          username: "CaseDiferente",
-          email: "casediferente.dev@gmail.com",
-          password: "senha123",
-        });
+        username: "CaseDiferente",
+        email: "casediferente.dev@gmail.com",
+        password: "senha123",
+      });
 
       const response3 = await fetch("http://localhost:3000/api/v1/users/casediferente");
       expect(response3.status).toBe(200);
