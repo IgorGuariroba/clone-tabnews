@@ -31,7 +31,7 @@ describe("POST /api/v1/sessions", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Email ou senha incorretos.",
+        message: "Dados de autenticação não conferem.",
         action: "Verifique se o email e a senha estão corretos.",
         status_code: 401,
       });
@@ -57,7 +57,7 @@ describe("POST /api/v1/sessions", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Email ou senha incorretos.",
+        message: "Dados de autenticação não conferem.",
         action: "Verifique se o email e a senha estão corretos.",
         status_code: 401,
       });
@@ -80,7 +80,7 @@ describe("POST /api/v1/sessions", () => {
       const responseBody = await response.json();
       expect(responseBody).toEqual({
         name: "UnauthorizedError",
-        message: "Email ou senha incorretos.",
+        message: "Dados de autenticação não conferem.",
         action: "Verifique se o email e a senha estão corretos.",
         status_code: 401,
       });
