@@ -8,8 +8,6 @@ import user from "models/user.js";
 import password from "models/password.js";
 import session from "models/session.js";
 
-const SESSION_COOKIE_NAME = "session_id";
-
 const INVALID_CREDENTIALS_ERROR = {
   message: "Credenciais inválidas.",
   action: "Verifique se o username (ou email) e a senha informados estão corretos.",
@@ -59,7 +57,7 @@ async function postHandler(request, response) {
 }
 
 async function deleteHandler(request, response) {
-  const token = request.cookies ? request.cookies[SESSION_COOKIE_NAME] : undefined;
+  const token = request.cookies ? request.cookies[session.SESSION_COOKIE_NAME] : undefined;
 
   if (isFilledString(token)) {
     await session.expireByToken(token);
@@ -75,7 +73,7 @@ async function deleteHandler(request, response) {
 function setSessionCookie(response, token, maxAgeInSeconds) {
   response.setHeader(
     "Set-Cookie",
-    serialize(SESSION_COOKIE_NAME, token, {
+    serialize(session.SESSION_COOKIE_NAME, token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       path: "/",
