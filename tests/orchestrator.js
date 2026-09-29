@@ -1,4 +1,5 @@
 import retry from "async-retry";
+import { parse as parseCookie } from "cookie";
 import database from "../infra/database";
 import migrator from "models/migrator.js";
 import user from "models/user.js";
@@ -38,10 +39,22 @@ async function createUser(userObject) {
   });
 }
 
+// Node's fetch has no cookie jar, so tests carry the session cookie by hand.
+function extractSessionCookie(response) {
+  const setCookieHeader = response.headers.get("set-cookie");
+
+  if (!setCookieHeader) {
+    return null;
+  }
+
+  return parseCookie(setCookieHeader).session_id || null;
+}
+
 const orchestrators = {
   waitForAllServices,
   clearDatabase,
   runPendingMigrations,
   createUser,
+  extractSessionCookie,
 };
 export default orchestrators;
