@@ -114,10 +114,11 @@ describe("PATCH /api/v1/users/[username]", () => {
         id: responseBody.id,
         username: "uniqueUser2",
         email: responseBody.email,
-        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
+
+      expect(responseBody).not.toHaveProperty("password");
 
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
@@ -155,10 +156,11 @@ describe("PATCH /api/v1/users/[username]", () => {
         id: responseBody.id,
         email: "uniqueEmail2@gmail.com",
         username: responseBody.username,
-        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
+
+      expect(responseBody).not.toHaveProperty("password");
 
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
@@ -196,10 +198,11 @@ describe("PATCH /api/v1/users/[username]", () => {
         id: responseBody.id,
         email: "newPassword1@gmail.com",
         username: "newPassword1",
-        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
+
+      expect(responseBody).not.toHaveProperty("password");
 
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
