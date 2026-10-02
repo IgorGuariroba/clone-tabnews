@@ -125,6 +125,13 @@ async function runUpdateQuery(userWithNewValues) {
   return results.rows[0];
 }
 
+// The password hash is an internal verifier: it never crosses the HTTP boundary.
+function hidePassword(userObject) {
+  const safeUserObject = { ...userObject };
+  delete safeUserObject.password;
+  return safeUserObject;
+}
+
 async function validateUniqueUsername(username) {
   const results = await database.query({
     text: `
@@ -171,6 +178,7 @@ const user = {
   findOneByUsername,
   findOneByUsernameOrEmail,
   update,
+  hidePassword,
 };
 
 export default user;

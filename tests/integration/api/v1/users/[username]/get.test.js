@@ -23,10 +23,11 @@ describe("GET /api/v1/users/[username]", () => {
         id: responseBody.id,
         username: "igorGuariroba",
         email: "igorguariroba.dev@gmail.com",
-        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
+
+      expect(responseBody).not.toHaveProperty("password");
     });
 
     test("With case mismatch", async () => {
@@ -43,10 +44,11 @@ describe("GET /api/v1/users/[username]", () => {
         id: responseBody.id,
         username: "CaseDiferente",
         email: "casediferente.dev@gmail.com",
-        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
+
+      expect(responseBody).not.toHaveProperty("password");
     });
 
     test("With nonexistent username", async () => {

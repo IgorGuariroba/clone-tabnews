@@ -32,10 +32,11 @@ describe("POST /api/v1/users", () => {
         id: responseBody.id,
         username: "igorGuariroba",
         email: "igorguariroba.dev@gmail.com",
-        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
+
+      expect(responseBody).not.toHaveProperty("password");
 
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();

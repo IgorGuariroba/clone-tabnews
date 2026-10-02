@@ -30,11 +30,8 @@ async function getHandler(request, response) {
     throw sessionInvalidError();
   }
 
-  const safeUserFound = { ...userFound };
   // The password hash never leaves this endpoint.
-  delete safeUserFound.password;
-
-  return response.status(200).json(safeUserFound);
+  return response.status(200).json(user.hidePassword(userFound));
 }
 
 async function findUserOrNull(id) {

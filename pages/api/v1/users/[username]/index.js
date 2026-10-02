@@ -13,7 +13,8 @@ async function getHandler(request, response) {
   const username = request.query.username;
   const userFound = await user.findOneByUsername(username);
   if (userFound) {
-    return response.status(200).json(userFound);
+    // The password hash never leaves this endpoint.
+    return response.status(200).json(user.hidePassword(userFound));
   }
 }
 
@@ -22,5 +23,7 @@ async function patchHandler(request, response) {
   const userInputValues = request.body;
 
   const updatedUser = await user.update(username, userInputValues);
-  return response.status(200).json(updatedUser);
+
+  // The password hash never leaves this endpoint.
+  return response.status(200).json(user.hidePassword(updatedUser));
 }

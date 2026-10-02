@@ -49,11 +49,8 @@ async function postHandler(request, response) {
 
   setSessionCookie(response, newSession.token, session.SESSION_EXPIRATION_IN_MILLISECONDS / 1000);
 
-  const safeUserFound = { ...userFound };
   // The password hash never leaves the session endpoint.
-  delete safeUserFound.password;
-
-  return response.status(201).json(safeUserFound);
+  return response.status(201).json(user.hidePassword(userFound));
 }
 
 async function deleteHandler(request, response) {
